@@ -9,3 +9,6 @@ class Menu:
 
         def run(self,  ):
             pass
+
+    def run(self):
+        pass
