@@ -1,5 +1,21 @@
 #C
 C_WHITE = (255,255,255)
+C_YELLOW = (255,255,0)
+
+CONTROLS = ('CONTROLES:',
+            'W - andar para frente',
+            'S - andar para trás',
+            'A - andar para esquerda',
+            'D - andar para direita')
+
+#E
+ENTITY_SPEED = {
+    'FUNDO0': 0,
+    'FUNDO1': 1,
+    'FUNDO2': 2,
+    'FUNDO3': 3,
+    'FUNDO4': 0.5,
+}
 
 #M
 MENU_OPTION = ('NOVO JOGO',
