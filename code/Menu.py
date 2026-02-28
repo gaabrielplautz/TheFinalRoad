@@ -12,7 +12,7 @@ class Menu:
 
     def __init__(self, window):
         self.window = window
-        self.surf = pygame.image.load('./assets/IMG/menuBackground.png')
+        self.surf = pygame.image.load('./assets/IMG/menuBackground.png').convert_alpha()
         self.rect = self.surf.get_rect(left=0, top=0)
 
     def run(self, ):

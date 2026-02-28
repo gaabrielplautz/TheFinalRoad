@@ -1,16 +1,15 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from code.Const import WIN_WIDTH, ENTITY_SPEED
+from code.Const import ENTITY_SPEED, WIN_WIDTH
 from code.Entity import Entity
 
 
-class Background(Entity):
-
+class Npc(Entity):
     def __init__(self, name: str, position: tuple):
         super().__init__(name, position)
 
-    def move(self, velocidade = 0):
+    def move(self, ):
         self.rect.centerx -= ENTITY_SPEED[self.name]
         if self.rect.right <= 0:
             self.rect.left = WIN_WIDTH
-
+        pass
