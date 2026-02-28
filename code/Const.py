@@ -24,6 +24,16 @@ ENTITY_SPEED = {
     'Npc2': 2,
 }
 
+ENTITY_HEALTH = {
+    'FUNDO0': 999,
+    'FUNDO1': 999,
+    'FUNDO2': 999,
+    'FUNDO3': 999,
+    'FUNDO4': 999,
+    'Player': 300,
+    'Npc1': 50,
+    'Npc2': 60,
+}
 #M
 MENU_OPTION = ('NOVO JOGO',
                'SCORE',
