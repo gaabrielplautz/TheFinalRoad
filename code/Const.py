@@ -1,8 +1,12 @@
 #C
+from asyncio.constants import ACCEPT_RETRY_DELAY
+
 import pygame
 
 C_WHITE = (255,255,255)
 C_YELLOW = (255,255,0)
+C_GREEN = (0,255,0)
+C_RED = (255, 0, 0)
 
 CONTROLS = ('CONTROLES:',
             'W - andar para frente',
@@ -40,6 +44,9 @@ MENU_OPTION = ('NOVO JOGO',
                'SAIR'
                )
 
+#R
+FAIXA_A = 530  # Faixa de cima (mais ao fundo)
+FAIXA_B = 720  # Faixa de baixo (mais à frente)
 #S
 SPAW_TIME = 4000
 

@@ -15,7 +15,7 @@ class EntityFactory:
     def get_entity(entity_name: str):
 
         FAIXA_A = 650  # Faixa mais ao fundo (superior)
-        FAIXA_B = 460  # Faixa mais à frente (inferior)
+        FAIXA_B = 200  # Faixa mais à frente (inferior)
 
         match entity_name:
             case 'FUNDO':
@@ -26,10 +26,14 @@ class EntityFactory:
                 return list_bg
 
             case 'Player':
-                # Colocamos o player em uma das faixas por padrão
-                return Player('Player', (10, WIN_HEIGHT -150))
+                p = Player('Player', (10, 0))  # Criamos com Y zero temporariamente
+                # Ajustamos a BASE (bottom) para a faixa, assim ele "pisa" na estrada
+                # Se FAIXA_B é 650, o caminhão vai ficar DO 650 PARA CIMA.
+                p.rect.bottom = FAIXA_B
+                return p
 
             case 'Npc1' | 'Npc2':
-                # Sorteia uma das duas faixas para qualquer tipo de NPC
                 posicao_y = random.choice([FAIXA_A, FAIXA_B])
-                return Npc(entity_name, (WIN_WIDTH + 10, posicao_y))
+                n = Npc(entity_name, (WIN_WIDTH + 10, 0))
+                n.rect.bottom = posicao_y  # NPC também "pisa" na faixa
+                return n
