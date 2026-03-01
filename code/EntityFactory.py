@@ -8,14 +8,13 @@ from code.Npc import Npc
 from code.player import Player
 
 
-
 class EntityFactory:
 
     @staticmethod
     def get_entity(entity_name: str):
 
         FAIXA_A = 650  # Faixa mais ao fundo (superior)
-        FAIXA_B = 200  # Faixa mais à frente (inferior)
+        FAIXA_B = 200  # Faixa mais adiante (inferior)
 
         match entity_name:
             case 'FUNDO':
