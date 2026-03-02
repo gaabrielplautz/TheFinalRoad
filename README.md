@@ -1,4 +1,4 @@
-# ![alt_text](https://github.com/gaabrielplautz/TheFinalRoad/blob/6ddcd248aa224014215dcb32042a6a66d39634e1/assets/IMG/miniatura.png) THE FINAL ROAD ![alt_text](https://github.com/gaabrielplautz/TheFinalRoad/blob/6ddcd248aa224014215dcb32042a6a66d39634e1/assets/IMG/miniatura.png)----
+# ![alt_text](https://github.com/gaabrielplautz/TheFinalRoad/blob/6ddcd248aa224014215dcb32042a6a66d39634e1/assets/IMG/miniatura.png) THE FINAL ROAD ![alt_text](https://github.com/gaabrielplautz/TheFinalRoad/blob/6ddcd248aa224014215dcb32042a6a66d39634e1/assets/IMG/miniatura.png)
 
 ### About
 
