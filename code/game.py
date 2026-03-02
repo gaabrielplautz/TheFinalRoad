@@ -1,5 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+import sys
+
 import pygame
 
 from code.Const import WIN_WIDTH, WIN_HEIGHT, MENU_OPTION
@@ -36,6 +38,6 @@ class Game:
             # Check if the player chose to Exit the game
             elif menu_return == MENU_OPTION[2]:
                 pygame.quit()  # Close Window
-                quit()  # end pygame
+                sys.exit()  # end pygame
             else:
                 pass
