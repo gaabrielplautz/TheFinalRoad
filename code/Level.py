@@ -9,9 +9,8 @@ from code.EntityFactory import EntityFactory
 from code.EntityMediator import EntityMediator
 from code.roda import Roda
 
-# --- CONFIGURAÇÕES DE DIFICULDADE (Ajuste aqui) ---
-NPC_ACCELERATION = 0.001  # O quanto aumenta por frame
-MIN_SPAW_TIME = 600  # Intervalo mínimo entre NPCs (0.6 segundos)
+NPC_ACCELERATION = 0.001  # How much does it increase per frame
+MIN_SPAW_TIME = 600  # Minimum interval between NPCs (0.6 seconds)
 
 
 class Level:
@@ -21,11 +20,11 @@ class Level:
         self.menu_option = menu_option
         self.clock = pygame.time.Clock()
 
-        # Variáveis de controle de dificuldade
-        self.npc1_speed = ENTITY_SPEED['Npc1']  # Começa em 5
-        self.npc2_speed = ENTITY_SPEED['Npc2']  # Começa em 5
+        # Difficulty control variables
+        self.npc1_speed = ENTITY_SPEED['Npc1']  # Starts in 5
+        self.npc2_speed = ENTITY_SPEED['Npc2']  # Starts in 5
         self.current_spawn_time = SPAW_TIME
-        self.last_spawn_ticks = pygame.time.get_ticks()  # Cronômetro manual
+        self.last_spawn_ticks = pygame.time.get_ticks()  # Manual stopwatch
         self.last_timer_update = 0
 
         self.sombra_surface = pygame.Surface((WIN_WIDTH, WIN_HEIGHT))
@@ -43,7 +42,7 @@ class Level:
         self.score = 0
         self.tempo_atual = 0
         self.start_time = pygame.time.get_ticks()
-        self.last_spawn_ticks = pygame.time.get_ticks()  # Reset do cronômetro
+        self.last_spawn_ticks = pygame.time.get_ticks()  # Timer reset
 
         self.npc1_speed = ENTITY_SPEED['Npc1']
         self.npc2_speed = ENTITY_SPEED['Npc2']
@@ -52,7 +51,7 @@ class Level:
         self.entity_list = []
         self.grupo_rodas = pygame.sprite.Group()
 
-        # Fundo e Player
+        # Background and Player
         bg_data = EntityFactory.get_entity('FUNDO')
         self.entity_list.extend(bg_data) if isinstance(bg_data, list) else self.entity_list.append(bg_data)
 
@@ -80,9 +79,9 @@ class Level:
         pygame.mixer_music.play(-1)
 
         while True:
-            current_ticks = pygame.time.get_ticks()  # Tempo exato agora
+            current_ticks = pygame.time.get_ticks()  # Exact time now
 
-            # --- 1. EVENTOS ---
+            # --- 1. EVENTS ---
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -94,19 +93,19 @@ class Level:
                     elif event.key == pygame.K_ESCAPE:
                         return "MENU"
 
-            # --- 2. LÓGICA DE JOGO ---
+            # --- 2. GAME LOGIC ---
             if not self.game_over:
-                # Aumenta a velocidade (Aceleração)
+                # Increases speed (Acceleration)
                 self.npc1_speed += NPC_ACCELERATION
                 self.npc2_speed += NPC_ACCELERATION
-                self.npc1_speed = min(self.npc1_speed, 18)  # Limite máximo
+                self.npc1_speed = min(self.npc1_speed, 18)  # Maximum limit
 
-                # --- CONTROLE DE SPAWN MANUAL ---
-                # Se passou tempo suficiente desde o último NPC
+                # --- MANUAL SPAWN CONTROL ---
+                # Enough time has passed since the last NPC
                 if current_ticks - self.last_spawn_ticks > self.current_spawn_time:
                     distancia_ok = True
                     for ent in self.entity_list:
-                        # Se houver um NPC muito perto da entrada (350px), esperamos um pouco mais
+                        # If there is an NPC very close to the entrance (680px), wait a little longer.
                         if 'Npc' in ent.__class__.__name__ and ent.rect.x > WIN_WIDTH - 680:
                             distancia_ok = False
                             break
@@ -119,28 +118,28 @@ class Level:
                             novo_npc.rect.bottom = random.choice([FAIXA_A, FAIXA_B])
                             novo_npc.ponto_contado = False
                             self.entity_list.append(novo_npc)
-                            # SÓ RESETA O RELÓGIO SE O NPC NASCER
+                            # ONLY RESET THE CLOCK IF THE NPC SPAWNS
                             self.last_spawn_ticks = current_ticks
 
-                            # Ajusta o tempo de spawn conforme a velocidade aumenta
+                            # Adjusts spawn time as speed increases
                 nova_taxa = ENTITY_SPEED['Npc1'] / self.npc1_speed
                 self.current_spawn_time = max(int(SPAW_TIME * nova_taxa), MIN_SPAW_TIME)
 
-                # Movimentação
+                # Movement
                 for ent in self.entity_list[:]:
                     if ent.name in ('Npc1', 'Npc2'):
                         ent.move(self.npc1_speed if ent.name == 'Npc1' else self.npc2_speed)
                     else:
                         ent.move()
 
-                    # Pontuação e Remoção
+                    # Scoring and Removal
                     if ent != self.player and 'Npc' in ent.__class__.__name__:
                         if self.player.rect.left > ent.rect.right and not ent.ponto_contado:
                             self.score += 10
                             ent.ponto_contado = True
-                        if ent.rect.right < -100:  # Remove quando sair totalmente da tela
+                        if ent.rect.right < -100:  # Remove when completely exiting the screen
                             self.entity_list.remove(ent)
-
+                # Physics and Collision handling via Mediator pattern
                 self.grupo_rodas.update()
                 EntityMediator.verify_collision(self.entity_list)
                 EntityMediator.verify_health(self.entity_list)
@@ -149,7 +148,7 @@ class Level:
                 if self.player.health <= 0:
                     self.game_over = True
 
-            # --- 3. DESENHO ---
+            # --- 3. DRAWING ---
             self.window.fill((0, 0, 0))
             for ent in self.entity_list:
                 self.window.blit(ent.image, ent.rect)
@@ -168,4 +167,4 @@ class Level:
                     return "MENU"
 
             pygame.display.flip()
-            self.clock.tick(60)
+            self.clock.tick(60)  # Maintain steady 60 FPS

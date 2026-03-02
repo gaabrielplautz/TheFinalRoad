@@ -1,18 +1,20 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from code.Const import ENTITY_SPEED, WIN_WIDTH
+from code.Const import ENTITY_SPEED
 from code.Entity import Entity
 
 
 class Npc(Entity):
     def __init__(self, name: str, position: tuple):
+        # Initialize the NPC entity using the base Entity constructor
         super().__init__(name, position)
 
     # Adicionamos 'speed=None' como um argumento opcional
     def move(self, speed=None):
-        # Se o Level passar uma velocidade (speed), usamos ela.
-        # Se não passar (speed is None), usamos a velocidade padrão do dicionário.
+        # If no specific speed is provided by the Level (speed is None),
+        # retrieve the default value from the ENTITY_SPEED dictionary.
         if speed is None:
             speed = ENTITY_SPEED[self.name]
 
+        # Apply horizontal movement
         self.rect.centerx -= speed

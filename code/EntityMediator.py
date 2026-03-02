@@ -1,5 +1,8 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from code.Entity import Entity
 from code.Npc import Npc
+
 
 class EntityMediator:
 
@@ -21,23 +24,23 @@ class EntityMediator:
     @staticmethod
     def verify_health(entity_list: list[Entity]):
         for ent in entity_list[:]:
-            # Se a vida for <= 0 e NÃO for o Player, remove da lista
+            # If life count is <= 0 and it is NOT the Player, remove from the list.
             if ent.health <= 0:
                 if ent.__class__.__name__ != 'Player':
                     entity_list.remove(ent)
 
-    @staticmethod # ADICIONADO @STATICMETHOD
-    def verify_collision_entity(ent1: Entity, ent2: Entity): # REMOVIDO O 'self'
+    @staticmethod
+    def verify_collision_entity(ent1: Entity, ent2: Entity):  # REMOVIDO O 'self'
         nome1 = ent1.__class__.__name__
         nome2 = ent2.__class__.__name__
 
-        # Ignora se qualquer um dos envolvidos for o fundo
+        # Ignore if any of those involved are the fund.
         if 'Background' in nome1 or 'Background' in nome2:
             return False
 
-        # Verifica se os retângulos estão se encostando de fato
+        # Check if the rectangles are actually touching.
         if ent1.rect.colliderect(ent2.rect):
-            # Lógica para Player e NPC
+            # Logic for Player and NPC
             if (nome1 == 'Player' and 'Npc' in nome2) or (nome2 == 'Player' and 'Npc' in nome1):
                 ent1.health = 0
                 ent2.health = 0

@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 import sys
 import pygame
 from pygame.constants import KEYDOWN, K_BACKSPACE, K_RETURN, K_ESCAPE
@@ -68,16 +70,13 @@ class Score:
             exit_text = 'Pressione ESC ou ENTER para voltar ao menu'
             self.score_text(20, exit_text, C_YELLOW, SCORE_POS['Exit'])
 
-            # --- CORREÇÃO DE ALINHAMENTO DO CABEÇALHO ---
-            # 'NAME' ocupa 10 espaços, depois 5 espaços de separação, 'SCORE' ocupa 5.
+            # 'NAME' occupies 10 spaces, then 5 spaces for separation, 'SCORE' occupies 5.
             header = f"{'NAME':<10}     {'SCORE':<5}     {'DATE'}"
             self.score_text(20, header, C_YELLOW, SCORE_POS['Label'])
 
             for index, player_score in enumerate(list_score):
                 id_, name, score, date = player_score
 
-                # --- MESMA ESTRUTURA DE ESPAÇOS PARA OS DADOS ---
-                # Isso garante que o Score comece sempre na mesma coluna vertical
                 display_line = f"{name:<10}     {score:05d}     {date}"
 
                 self.score_text(20, display_line, C_WHITE, SCORE_POS[index])
@@ -96,15 +95,16 @@ class Score:
         text_font: Font = pygame.font.SysFont(name="Lucida Sans Typewriter", size=text_size)
         text_surf: Surface = text_font.render(text, True, text_color).convert_alpha()
 
-        # Alinhamento Inteligente:
-        # Se for no centro exato da tela (Title, Name), usamos center.
-        # Se for a tabela (Label, 0, 1, 2...), usamos topleft para não entortar.
+        # Smart Alignment
+        # If it's exactly in the center of the screen (Title, Name), we use center.
+        # If it's a table (Label, 0, 1, 2...), we use topleft to avoid distortion.
         if text_pos[0] == WIN_WIDTH / 2:
             text_rect: Rect = text_surf.get_rect(center=text_pos)
         else:
             text_rect: Rect = text_surf.get_rect(topleft=text_pos)
 
         self.window.blit(source=text_surf, dest=text_rect)
+
 
 def get_formatted_date():
     current_datetime = datetime.now()
