@@ -4,13 +4,13 @@
 
 The Final Road is a 2D arcade game developed with Pygame, where you take control of a truck and have to dodge oncoming vehicles. As the game progresses, the speed of the NPCs increases, making it more difficult. Points are added for each overtaking maneuver, and the score is saved in a SQLite3 database.
 
-<img width="1592" height="932" alt="image" src="https://github.com/user-attachments/assets/a9367a52-2ba6-49db-8ac2-5201f600c109" />
+| Main Menu | Gameplay |
+| :---: | :---: |
+|<img width="500" alt="image" src="https://github.com/user-attachments/assets/a9367a52-2ba6-49db-8ac2-5201f600c109" />|<img width="500" alt="image" src="https://github.com/user-attachments/assets/3bebbfdc-6cca-426f-825f-a91851c56e02" />|
 
-<img width="1590" height="932" alt="image" src="https://github.com/user-attachments/assets/b9ffc4c6-c642-4a0c-a882-fbabeed88726" />
-
-<img width="1577" height="932" alt="image" src="https://github.com/user-attachments/assets/bc2c35b0-e446-48c1-804a-0ee51fd84ab5" />
-
-<img width="1597" height="936" alt="image" src="https://github.com/user-attachments/assets/8a6e911d-3584-414c-94c6-2310e4b5f05e" />
+| Top 10 High Scores | Game Over |
+| :---: | :---: |
+|<img width="500" alt="image" src="https://github.com/user-attachments/assets/bc2c35b0-e446-48c1-804a-0ee51fd84ab5" />|<img width="500" alt="image" src="https://github.com/user-attachments/assets/8a6e911d-3584-414c-94c6-2310e4b5f05e" />|
 
 
 
